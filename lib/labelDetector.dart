@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mlkit_image_labeling/google_mlkit_image_labeling.dart';
 import 'package:path_provider/path_provider.dart';
-
+import 'package:path/path.dart';
 import 'detector_view.dart';
 import 'label_detector_painter.dart';
 
@@ -103,7 +103,7 @@ class _ImageLabelViewState extends State<ImageLabelView> {
       return 'flutter_assets/$assetPath';
     }
     final path = '${(await getApplicationSupportDirectory()).path}/$assetPath';
-    await io.Directory(path).create(recursive: true);
+    await io.Directory(dirname(path)).create(recursive: true);
     final file = io.File(path);
     if (!await file.exists()) {
       final byteData = await rootBundle.load(assetPath);
